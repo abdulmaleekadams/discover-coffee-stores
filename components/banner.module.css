@@ -43,8 +43,7 @@
 }
 
 .button:hover{
-    background-color: var(--text-secondary-dark);
-    color: var(--text-primary);
+    box-shadow: 0px 10px 10px rgba(10, 10, 10, 0.4);
 }
 
 /** 

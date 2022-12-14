@@ -5,10 +5,10 @@ import Banner from "../components/banner";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
-  const [bannerBtnText, setBannerBtnText] = useState("View stores nearby")
+  const [bannerBtnText, setBannerBtnText] = useState("View stores nearby");
   const handleOnBannerBtnClick = () => {
-    setBannerBtnText("Loading..")
-  }
+    setBannerBtnText("Loading..");
+  };
   return (
     <div className={styles.container}>
       <Head>
@@ -18,7 +18,11 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <Banner buttonText={bannerBtnText} handleOnClick={handleOnBannerBtnClick}/>
+        <Banner
+          buttonText={bannerBtnText}
+          handleOnClick={handleOnBannerBtnClick}
+        />
+        <Image src="/static/hero-image.png" alt="Hero img" width={700} height={400} className={styles.heroImage} />
       </main>
     </div>
   );
