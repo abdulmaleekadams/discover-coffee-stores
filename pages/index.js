@@ -2,6 +2,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
 import Banner from "../components/banner";
+import Card from "../components/card";
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
@@ -22,7 +23,8 @@ export default function Home() {
           buttonText={bannerBtnText}
           handleOnClick={handleOnBannerBtnClick}
         />
-        <Image src="/static/hero-image.png" alt="Hero img" width={700} height={400} className={styles.heroImage} />
+        <Image src="/static/hero-image.png" alt="Hero img" width={700} height={400} className={styles.heroImage} priority />
+        <Card name={`DarkHorse Coffee`} href={`/coffee-store/darkhorse-coffee`} imageUrl={`/static/hero-image`} />
       </main>
     </div>
   );
