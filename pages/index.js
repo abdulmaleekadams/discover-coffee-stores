@@ -4,6 +4,7 @@ import { useState } from "react";
 import Banner from "../components/banner";
 import Card from "../components/card";
 import styles from "../styles/Home.module.css";
+import CoffeeStores from "../data/coffee-store.json";
 
 export default function Home() {
   const [bannerBtnText, setBannerBtnText] = useState("View stores nearby");
@@ -23,8 +24,25 @@ export default function Home() {
           buttonText={bannerBtnText}
           handleOnClick={handleOnBannerBtnClick}
         />
-        <Image src="/static/hero-image.png" alt="Hero img" width={700} height={400} className={styles.heroImage} priority />
-        <Card name={`DarkHorse Coffee`} href={`/coffee-store/darkhorse-coffee`} imageUrl={`/static/hero-image`} />
+        <Image
+          src="/static/hero-image.png"
+          alt="Hero img"
+          width={700}
+          height={400}
+          className={styles.heroImage}
+          priority
+        />
+        <div className={styles.cardLayout}>
+          {CoffeeStores.map((coffeeStore) => (
+            <Card
+              key={coffeeStore.name}
+              name={coffeeStore.name}
+              href={`/coffee-store/${coffeeStore.name.toLowerCase().replace(' ', '-')}`}
+              imageUrl={coffeeStore.imgUrl}
+              className={`styles.card`}
+            />
+          ))}
+        </div>
       </main>
     </div>
   );
