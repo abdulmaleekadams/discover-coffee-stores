@@ -4,9 +4,15 @@ import { useState } from "react";
 import Banner from "../components/banner";
 import Card from "../components/card";
 import styles from "../styles/Home.module.css";
-import CoffeeStores from "../data/coffee-store.json";
+import coffeeStoresData from "../data/coffee-store.json";
 
-export default function Home() {
+export async function getStaticProps(context) {
+  return {
+    props: { coffeeStores: coffeeStoresData },
+  };
+}
+
+export default function Home({coffeeStores}) {
   const [bannerBtnText, setBannerBtnText] = useState("View stores nearby");
   const handleOnBannerBtnClick = () => {
     setBannerBtnText("Loading..");
@@ -24,25 +30,35 @@ export default function Home() {
           buttonText={bannerBtnText}
           handleOnClick={handleOnBannerBtnClick}
         />
-        <Image
-          src="/static/hero-image.png"
-          alt="Hero img"
-          width={700}
-          height={400}
-          className={styles.heroImage}
-          priority
-        />
-        <div className={styles.cardLayout}>
-          {CoffeeStores.map((coffeeStore) => (
-            <Card
-              key={coffeeStore.name}
-              name={coffeeStore.name}
-              href={`/coffee-store/${coffeeStore.name.toLowerCase().replace(' ', '-')}`}
-              imageUrl={coffeeStore.imgUrl}
-              className={`styles.card`}
-            />
-          ))}
+        <div className={styles.heroImage}>
+          <Image
+            src="/static/hero-image.png"
+            alt="Hero img"
+            width={700}
+            height={400}
+            priority
+          />
         </div>
+        {coffeeStores.length > 0 ? (
+          <section className={styles.sectionWrapper}>
+            <h2 className={styles.heading2}>Toronto Stores</h2>
+            <div className={styles.cardLayout}>
+              {coffeeStores.map((coffeeStore) => (
+                <Card
+                  key={coffeeStore.name}
+                  name={coffeeStore.name}
+                  href={`/coffee-store/${coffeeStore.name
+                    .toLowerCase()
+                    .replace(/ /g, "-")}`}
+                  imageUrl={coffeeStore.imgUrl}
+                  className={`styles.card`}
+                />
+              ))}
+            </div>
+          </section>
+        ) : (
+          <div></div>
+        )}
       </main>
     </div>
   );
